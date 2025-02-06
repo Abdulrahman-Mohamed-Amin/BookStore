@@ -21,10 +21,10 @@ export class LandingService {
     return this.http.post(this.local + '/api/basket/item' , book)
   }
   deleteBook(book:any) : Observable<any>{
-    return this.http.delete(this.local + `/api/basket/item/${book.book}`)
+    return this.http.delete(this.local + `/api/basket/item/${book}`)
   }
-  update(book:any ) : Observable<any>{
-    return this.http.put(this.local + `api/basket/${book.idk}` , book)
+  update(book:any , cartId:string) : Observable<any>{
+    return this.http.put(this.local + `/api/basket/${cartId}` , book)
   }
   getMyBasket() : Observable<any>{
     return this.http.get(this.local + '/api/basket')

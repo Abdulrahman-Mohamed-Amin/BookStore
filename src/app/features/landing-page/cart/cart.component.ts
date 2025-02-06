@@ -1,4 +1,4 @@
-import { Component, OnInit, output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SocialsComponent } from '../../../shared/socials/socials.component';
 import { SharedNavComponent } from '../../../shared/shared-nav/shared-nav.component';
 import { BarComponent } from '../bar/bar.component';
@@ -6,6 +6,7 @@ import { FooterComponent } from '../../../shared/footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { LandingService } from '../services/landing.service';
 import { CheckOutComponent } from '../check-out/check-out.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -15,47 +16,54 @@ import { CheckOutComponent } from '../check-out/check-out.component';
     BarComponent,
     FooterComponent,
     FormsModule,
-    CheckOutComponent,
+    CheckOutComponent
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
   productsInBasket: any[] = [];
+  filterdBook: any[] = [];
   allProduct: any[] = [];
   filteredProduct: any[] = [];
-  basket:any;
+  basket:number = 0;
   idOfBasket: string = '';
-  constructor(private _landingService: LandingService) {}
+  constructor(private _landingService: LandingService , private toast:ToastrService) {}
 
   ngOnInit(): void {
-    this.getAllProducts();
     this.getProductInBasket()
   }
 
-  getAllProducts() {
-    this._landingService.getBooks().subscribe({
-      next: (res) => {
-        this.allProduct = res.data;
-      },
-    });
-  }
 
   getProductInBasket(){
     this._landingService.getMyBasket().subscribe({
       next: (res) => {
-        this.basket = res
+        this.basket = res.total
         this.productsInBasket = res.items;
         this.idOfBasket = res._id;
-        console.log(this.productsInBasket);
-        
+
+        this._landingService.getBooks().subscribe({
+          next:(all) =>{
+            
+            for(let i = 0 ; i < all.data.length ; i++) {
+              for(let j = 0 ; j < this.productsInBasket.length ; j++){
+                if(this.productsInBasket[j].book == all.data[i]._id){
+
+                  this.filterdBook.push(all.data[j])
+                }
+              }
+            }
+            console.log(this.filterdBook);
+            
+          }
+        })
       },
     });
   }
   delete(id: string) {
-    const payLoad = { book: id };
-
-    this._landingService.deleteBook(payLoad).subscribe({
+    console.log(id);
+    
+    this._landingService.deleteBook(id).subscribe({
       next: (res) => {
         this.getProductInBasket()
         console.log(res);
@@ -63,33 +71,28 @@ export class CartComponent implements OnInit {
     });
   }
 
-  update(i: number) {
-    const payLoad = {
-      items: [
-        {
-          book: this.filteredProduct[i].id,
-          quantity: this.filteredProduct[i].qun,
-        },
-      ],
-    };
-
-    this._landingService.update(payLoad).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+  update(book:any) {
+    
+    let cartId = '67a0a71ddf3257cc8e03e65c'
+    const UpdatedBook = { items:[
+         {book: book._id,quantity: book.quantity},
+      ]}
+    
+    console.log(UpdatedBook , cartId);
+    this._landingService.update(UpdatedBook , cartId).subscribe({
+      next: (res) =>{
+        this.toast.success('' , res.message)
+      }
+    })
   }
   increment(i: number) {
-    this.filteredProduct[i].qun++;
+    this.productsInBasket[i].quantity++;
   }
   decrement(i: number) {
-    if (this.filteredProduct[i].qun == 1) {
-      this.filteredProduct[i].qun = 1;
+    if (this.productsInBasket[i].quantity == 1) {
+      this.productsInBasket[i].quantity = 1;
     } else {
-      this.filteredProduct[i].qun--;
+      this.productsInBasket[i].quantity--;
     }
   }
 

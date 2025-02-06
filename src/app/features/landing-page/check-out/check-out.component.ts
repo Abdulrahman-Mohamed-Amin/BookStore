@@ -13,6 +13,7 @@ import {
   StripeCardElementOptions
 } from '@stripe/stripe-js';
 import { LandingService } from '../services/landing.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class CheckOutComponent {
   @ViewChild(StripeCardComponent) cardElement!: StripeCardComponent;
   private readonly fb = inject(UntypedFormBuilder);
 
-  constructor(private _landingService:LandingService) {}
+  constructor(private _landingService:LandingService , private toaster:ToastrService) {}
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
@@ -61,15 +62,38 @@ export class CheckOutComponent {
   stripe = injectStripe(this.stripePublicKey);
 
   createToken() {
+    let cartId = '67a0a71ddf3257cc8e03e65c'
+    
     const name = this.checkoutForm.get('name')?.value;
     this.stripe
       .createToken(this.cardElement.element, { name })
       .subscribe((result) => {
         if (result.token) {
-          console.log(result.token.id);
-          
+          let payMent = {
+            "token":result.token.id,
+            "delivery_address":{
+                "country":"Egypt",
+                "city":"Giza",
+                "state":"Giza",
+                "building":25,
+                "street":"ayhaga",
+                "floor":3,
+                "appartment":21,
+                "mobile":"01004444444",
+                "additional_info":"ayhaga",
+                "location":{
+                    "type":"Point",
+                    "coordinates": [30.0444,31.2357]
+                }
+            }
+        }
+        this._landingService.order(payMent , cartId).subscribe({
+          next:(res) =>{
+            this.toaster.success('' , res.message)
+          }
+        })
         } else if (result.error) {
-          // Error creating the token
+         
           console.log(result.error.message);
         }
       });

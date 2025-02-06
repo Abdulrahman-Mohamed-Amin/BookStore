@@ -31,19 +31,19 @@
                 </td>
                 <td>
                   <div class="counter">
-                    <div class="min" (click)="decrement(i)">-</div>
+                    <div class="min" (click)="decrement(i)" (click)="update(product)">-</div>
                     <input
                       type="text"
                       class="text-center"
                       value="1"
                       [(ngModel)]="product.quantity"
                     />
-                    <div class="plus" (click)="increment(i)" (click)="update(i)">+</div>
+                    <div class="plus" (click)="increment(i)" (click)="update(product)">+</div>
                   </div>
                 </td>
                 <td class="total">110AED</td>
                 <td class="total">AED</td>
-                <td><i class="fas fa-x delete" (click)="delete(product.book)"></i></td>
+                <td><i class="fas fa-x delete" (click)="delete(product._id)"></i></td>
               </tr>
 
             }
@@ -57,7 +57,7 @@
         <ul class="list-unstyled">
           <li class="">
             <span>Total</span>
-            <span>{{basket.total}}AED</span>
+            <span>{{basket}}AED</span>
           </li>
           <li class="">
             <span>Tax</span>
@@ -65,7 +65,7 @@
           </li>
           <li class="">
             <span>Total Cart</span>
-            <span>{{basket.total + 1}} AED</span>
+            <span>{{basket + 1}} AED</span>
           </li>
         </ul>
       </div>

@@ -1,19 +1,30 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { LandingService } from '../services/landing.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [NgStyle],
+  imports: [NgStyle, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
   show:boolean = false
-  constructor(private route:Router , private _authService:AuthService , private toaster:ToastrService){}
+  constructor(private route:Router , private _authService:AuthService , private toaster:ToastrService , private _landService:LandingService){}
+  num:number = 0
+    
 
+    ngOnInit(): void {
+      this.getNmOfBooks()
+    }
+    getNmOfBooks(){
+      this._landService.getMyBasket().subscribe(res =>{
+        this.num = res.items.length
+      })
+    }
   goLogin(){
     this.route.navigateByUrl('/login')
   }
