@@ -1,0 +1,81 @@
+<app-socials></app-socials>
+<app-shared-nav></app-shared-nav>
+<app-bar [value]="'Cart'"></app-bar>
+<div class="container my-5">
+  <div class="row gy-5">
+    <div class="col-lg-7 col-12">
+      <div class="books shadow-sm">
+        <h6>Products Details</h6>
+        <table class="table table-borderless">
+          <thead>
+            <tr>
+              <th>Num</th>
+              <th>book</th>
+              <th>Amount</th>
+              <th>Cost</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(product of productsInBasket; track product ;let i = $index){
+              <tr class="">
+                <td>0{{i + 1}}</td>
+                <td class="d-flex align-items-center gap-2">
+                  <img
+                    src="assets/imgs/books/{{i + 1}}.png"
+                    alt=""
+                    width="70"
+                  />
+                  <div class="cover">Book Cover</div>
+                </td>
+                <td>
+                  <div class="counter">
+                    <div class="min" (click)="decrement(i)">-</div>
+                    <input
+                      type="text"
+                      class="text-center"
+                      value="1"
+                      [(ngModel)]="product.quantity"
+                    />
+                    <div class="plus" (click)="increment(i)" (click)="update(i)">+</div>
+                  </div>
+                </td>
+                <td class="total">110AED</td>
+                <td class="total">AED</td>
+                <td><i class="fas fa-x delete" (click)="delete(product.book)"></i></td>
+              </tr>
+
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-4 col-12 offset-lg-1 offset-0">
+      <div class="cart_total shadow-sm">
+        <h6>Cart Total Cost</h6>
+        <ul class="list-unstyled">
+          <li class="">
+            <span>Total</span>
+            <span>{{basket.total}}AED</span>
+          </li>
+          <li class="">
+            <span>Tax</span>
+            <span>1.6 AED</span>
+          </li>
+          <li class="">
+            <span>Total Cart</span>
+            <span>{{basket.total + 1}} AED</span>
+          </li>
+        </ul>
+      </div>
+
+      <button class="btn proced">Proced <i class="fas fa-cart-plus"></i></button>
+    </div>
+
+    <div class="col-lg-8 col-12 form">
+      <app-check-out [basketId]="idOfBasket"></app-check-out>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

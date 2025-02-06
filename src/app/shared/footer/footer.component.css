@@ -1,0 +1,9 @@
+.main{
+    background: var(--orange);
+}
+span{
+    font-size: 13px;
+}
+li{
+    font-size: 14px;
+}

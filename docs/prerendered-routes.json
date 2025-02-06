@@ -1,0 +1,13 @@
+{
+  "routes": {
+    "/BookStore": {},
+    "/BookStore/all-books": {},
+    "/BookStore/cart": {},
+    "/BookStore/changePass": {},
+    "/BookStore/forget": {},
+    "/BookStore/landing": {},
+    "/BookStore/login": {},
+    "/BookStore/register": {},
+    "/BookStore/reset": {}
+  }
+}

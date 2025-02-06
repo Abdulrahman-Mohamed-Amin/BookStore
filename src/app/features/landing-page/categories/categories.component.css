@@ -1,0 +1,21 @@
+.title{
+    font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    left: 25px;
+    width: fit-content;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background: var(--orange);
+    top: 50%;
+    transform: translateY(-50%);
+    right: 100%;
+    margin-right: 5px;
+}
+.blue{
+    width: fit-content;
+}

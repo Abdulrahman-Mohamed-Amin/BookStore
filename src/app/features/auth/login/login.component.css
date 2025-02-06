@@ -1,0 +1,22 @@
+
+
+.forget{
+  font-size: 13px;
+  cursor: pointer;
+}
+#remember{
+    border: 1px solid #6251dd;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+#remember:checked {
+    background-color: #6251dd;
+  }
+
+.remember{
+    color: #6251dd;
+    font-size: 13px;
+    font-weight: bold;
+}

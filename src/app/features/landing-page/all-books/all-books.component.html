@@ -1,0 +1,169 @@
+<app-socials></app-socials>
+<app-shared-nav></app-shared-nav>
+<app-bar [value]="'products'"></app-bar>
+<div class="container-fluid px-3 my-5">
+    <div class="menu shadow-sm bg-white p-2" [ngStyle]="{'right': show ? '0' :'-300px'}">
+        <i class="fas fa-xmark fs-4 close" (click)="close()"></i>
+        <div class="align-items-center justify-content-between d-flex flex-column gap-4 mt-4">
+                <select class="" (change)="sortByNameFun($event)">
+                    <option value="a-z" selected>Sort by : Alphabetically, A-Z</option>
+                    <option value="z-a">Sort by : Alphabetically, Z-A</option>
+                </select>
+                <select class="">
+                    <option value="1">Showing 1 - 12 of 26 result</option>
+                </select>
+                <select class="">
+                    <option value="8">Show : 8</option>
+                    <option value="4">Show : 4</option>
+                    <option value="2">Show : 2</option>
+                </select>
+                <div class="logo">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                </div>
+
+        </div>   
+        <div class="side mt-4">
+            <div class="price">
+                <p>Price</p>
+                <p class="line"></p>
+            </div>
+            <form  [formGroup]="price">
+                <div class="d-flex gap-4 mt-3 align-items-center">
+                    <div class="range">
+                        <span>$</span>
+                        <input type="number" name="" id="" class="form-control" formControlName="first">
+                    </div>
+                    <p class="text-secondary">to</p>
+                    <div class="range">
+                        <span>$</span>
+                        <input type="number" name="" id="" class="form-control" formControlName="last">
+                    </div>
+                </div>
+                <button type="submit" (click)="showBooksByPrice()">Filter</button>
+                @if(message){
+                    <div class="fw-bold mt-2 text-danger">Price is empty</div>
+                }
+            </form>
+            <ul class="mt-4 list-unstyled">
+                <li>
+                    <span>Product Type</span>
+                    <i class="fas fa-plus"></i>
+                </li>
+                <li>
+                    <span>Availability</span>
+                    <i class="fas fa-plus"></i>
+                </li>
+                <li>
+                    <span>Brand</span>
+                    <i class="fas fa-plus"></i>
+                </li>
+                <li>
+                    <span>Color</span>
+                    <i class="fas fa-plus"></i>
+                </li>
+                <li>
+                    <span>Material</span>
+                    <i class="fas fa-plus"></i>
+                </li>
+            </ul>
+        </div>  
+    </div>
+    <div class="row">
+        <div class="col-3 d-lg-block d-none">
+            <div class="side">
+                <div class="price">
+                    <p>Price</p>
+                    <p class="line"></p>
+                </div>
+                <form  [formGroup]="price">
+                    <div class="d-flex gap-4 mt-3 align-items-center">
+                        <div class="range">
+                            <span>$</span>
+                            <input type="number" name="" id="" class="form-control" formControlName="first">
+                        </div>
+                        <p class="text-secondary">to</p>
+                        <div class="range">
+                            <span>$</span>
+                            <input type="number" name="" id="" class="form-control" formControlName="last">
+                        </div>
+                    </div>
+                    <button type="submit" (click)="showBooksByPrice()">Filter</button>
+                    @if(message){
+                        <div class="fw-bold mt-2 text-danger">Price is empty</div>
+                    }
+                </form>
+                <ul class="mt-4 list-unstyled">
+                    <li>
+                        <span>Product Type</span>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li>
+                        <span>Availability</span>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li>
+                        <span>Brand</span>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li>
+                        <span>Color</span>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                    <li>
+                        <span>Material</span>
+                        <i class="fas fa-plus"></i>
+                    </li>
+                </ul>
+            </div>  
+        </div>
+        <div class="col-lg-9 col-12">
+            <div class="sorts mb-4 text-end">
+                <div class="align-items-center justify-content-between d-lg-flex d-none">
+                    <select class="" (change)="sortByNameFun($event)">
+                        <option value="a-z" selected>Sort by : Alphabetically, A-Z</option>
+                        <option value="z-a">Sort by : Alphabetically, Z-A</option>
+                    </select>
+                    <select class="">
+                        <option value="1">Showing 1 - 12 of 26 result</option>
+                    </select>
+                    <select class="">
+                        <option value="8">Show : 8</option>
+                        <option value="4">Show : 4</option>
+                        <option value="2">Show : 2</option>
+                    </select>
+                    <div class="logo">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                    </div>
+                </div>                
+                <i class="fas fa-bars fs-4 d-lg-none d-block me-4" (click)="open()"></i>
+            </div>
+            <div class="row gy-3">
+                @if (noBook) {
+                    <div class="text-danger fw-bold text-center mt-5">No Books Found</div>
+                }
+                @for(book of books2 ; track book ; let i = $index){
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="box mb-4 ">
+                            <div class="img_cont">
+                              <img src="assets/imgs/books/{{i + 1}}.png" alt="" class="w-100 shadow-sm">
+                            </div>
+                            <div class="info">
+                              <p class="text_blue text-center fw-bold m-0">{{book.name}}</p>
+                              <span class="name">{{book.author}}</span>
+                              <span class="price">$ {{book.price}}</span>
+                            </div>
+                            <button class="add_cart" (click)="addToCart(book._id)">ADD TO CART</button>
+                          </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

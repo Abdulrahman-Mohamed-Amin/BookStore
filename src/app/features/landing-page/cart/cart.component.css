@@ -1,0 +1,91 @@
+.container
+{
+    color: #393280;
+}
+
+.books{
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--grad);
+}
+.books table td , .books table th{
+    background: transparent;
+    color: #393280;
+}
+tr{
+    vertical-align: middle;
+    text-align: center;
+}
+.books thead{
+    border-block: 1px solid #ddd;
+}
+.cover{
+    font-size: 13px;
+    font-weight: bold;
+}
+.counter{
+    display: flex;
+    width: 75px;
+}
+.counter div{
+    background: #393280;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    width: 25px;
+    cursor: pointer;
+}
+.min{
+    border-radius: 7px 0 0 7px;
+}
+.plus{
+    border-radius: 0 7px 7px 0;
+}
+.counter input{
+    width: 25px;
+    border: none;
+    outline: none;
+
+}
+.total{
+    font-size: 12px;
+    font-weight: bold;
+}
+.delete{
+    border: 1px solid #393280;
+    border-radius: 4px;
+    padding: 5px 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 12px;
+}
+.delete:hover{
+    border: 1px solid #393280;
+    background: #393280;
+    color: #fff;
+}
+.cart_total{
+    background: var(--grad);
+    padding: 10px;
+    border-radius: 10px;
+}
+.cart_total ul li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+.proced{
+    background: var(--orange);
+    color: #fff;
+    margin-top: 30px;
+    width: 100%;
+    border-radius: 0;
+    padding: 10px;
+}
+.form{
+    background: var(--grad);
+    padding: 20px;
+    border-radius: 10px;
+}

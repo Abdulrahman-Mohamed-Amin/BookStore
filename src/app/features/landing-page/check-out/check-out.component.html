@@ -1,0 +1,19 @@
+<div class="container">
+    <div [formGroup]="checkoutForm">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <input matInput placeholder="name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <input matInput placeholder="Email" type="email" formControlName="email" />
+      </mat-form-field>
+      <ngx-stripe-elements
+        [stripe]="stripe"
+        [elementsOptions]="elementsOptions"
+      >
+        <ngx-stripe-card [options]="cardOptions" />
+      </ngx-stripe-elements>
+    </div>
+    <button type="submit" (click)="createToken()" class="btn mt-3" style="background: #4F46E5; color: #fff;">
+      CREATE TOKEN 
+    </button>
+</div>

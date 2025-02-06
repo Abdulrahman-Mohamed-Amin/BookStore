@@ -1,0 +1,23 @@
+<div class="container py-5">
+  <p class="text_orange m-0 title">Categories</p>
+  <h2 class="text_blue">Explore our Top Categories</h2>
+
+  <div class="row mt-4 gy-3">
+    @for(category of categories; track category; let i = $index){
+        <div class="col-md-6 col-lg-4 col-12">
+            <div class="box">
+              <div class="img_cont mb-2">
+                <img
+                  src="assets/imgs/categories/{{ i + 1 }}.jpg"
+                  alt=""
+                  class="img-fluid rounded-2"
+                />
+              </div>
+              <p class="text-center text_blue fw-bold">{{category.title}}</p>
+            </div>
+          </div>
+    }
+  </div>
+
+  <button class="btn blue  mx-auto mt-3" (click)="veiwMore()"> Veiw More <i class="fas fa-arrow-right ms-2"></i></button>
+</div>

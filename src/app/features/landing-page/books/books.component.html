@@ -1,0 +1,28 @@
+<div class="main pt-5">
+  <p class="text-center text-secondary title">Some quality items</p>
+  <h2 class="text_blue mb-5">New Release Books</h2>
+  
+<div class="container">
+  <owl-carousel-o [options]="customOptions" class="">
+    
+    @for(book of books ; track book ; let i = $index){
+      <ng-template carouselSlide >
+        <div class="box mb-4">
+          <div class="img_cont">
+            <img src="assets/imgs/books/{{i + 1}}.png" alt="">
+          </div>
+          <div class="info">
+            <p class="text_blue text-center fw-bold m-0">{{book.name}}</p>
+            <span class="name">{{book.author}}</span>
+            <span class="price">$ {{book.price}}</span>
+          </div>
+          <button class="add_cart" (click)="addToCart(book._id)">ADD TO CART</button>
+        </div>
+      </ng-template>   
+    }
+  </owl-carousel-o>
+
+  <button class="text_orange btn d-flex align-items-center gap-1" (click)="goToAllBooks()">Veiw All Products <i class="fas fa-arrow-right-long"></i></button>
+</div>
+
+</div>

@@ -1,0 +1,10 @@
+.main{
+    background: var(--dark-blue);
+}
+i{
+    cursor: pointer;
+    transition: 0.3s;
+}
+i:hover{
+    color: var(--orange);
+}

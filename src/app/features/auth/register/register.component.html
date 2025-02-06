@@ -1,0 +1,80 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-12 bg-warning  p-0 d-md-block d-none vh-100">
+            <img src="assets/imgs/edc9e4c7-f423-43d9-8d93-3a958070b9cb.jpg" alt="" class="w-100 h-100">
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form_box m-auto">
+                <img src="assets/imgs/logo.png" alt="" class="mx-auto mt-3 d-block" width="100">
+                <div class="mx-auto mt-4">
+                    <h6 class="text-secondary">Create new acccount</h6>
+                    <h4>Register</h4>
+                </div>
+                <form class="example-form mt-3" [formGroup]="register">
+                  <div class="row">
+                    <div class="col-sm-6 col-12">
+                        <label for="" class="fw-bold mb-1 d-block">First Name</label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <input type="text" matInput formControlName="first_name" placeholder="Abdo" class="">
+                          @if (register.get('first_name')!.getError('required')) {
+                            <mat-error>First name is <strong>required</strong></mat-error>
+                          }
+                        </mat-form-field>
+                      </div>
+                    <div class="col-sm-6 col-12">
+                        <label for="" class="fw-bold mb-1 d-block">Lats Name</label>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <input type="text" matInput formControlName="last_name" placeholder="Amin" class="">
+                          @if (register.get('last_name')!.getError('required')) {
+                            <mat-error>Last name is <strong>required</strong></mat-error>
+                          }
+                        </mat-form-field>
+                      </div>
+                    <div class="col-12">
+                      <label for="" class="fw-bold mb-1 d-block">Email</label>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com" class="">
+                        @if (register.get('email')!.getError('email') && !register.get('email')!.getError('required')) {
+                          <mat-error>Please enter a valid email address</mat-error>
+                        }
+                        @if (register.get('email')!.getError('required')) {
+                          <mat-error>Email is <strong>required</strong></mat-error>
+                        }
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                      <label for="" class="fw-bold mb-1 d-block">Password</label>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <input type="password" matInput formControlName="password" placeholder="Password">
+                        @if (register.get('password')!.getError('required')) {
+                          <mat-error>Password is <strong>required</strong></mat-error>
+                        }
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="" class="fw-bold mb-1 d-block">role</label>
+                        <mat-form-field appearance="outline" class="custom_input w-100">
+                            <mat-label>Choose an option</mat-label>
+                            <mat-select formControlName="role">
+                              <mat-option value="Admin">Admin</mat-option>
+                              <mat-option value="Customer">Customer</mat-option>
+                            </mat-select>
+                            @if (register.get('role')!.getError('required')) {
+                              <mat-error>role is <strong>required</strong></mat-error>
+                            }
+                          </mat-form-field>
+                    </div>
+                  </div>
+                 
+                      <div class="btns mt-2">
+                        <button type="submit" class="p-1 orange" (click)="getRegister()">Register</button>
+                        <button type="submit" class="p-1 blue mt-2" (click)="goLogin()">Login</button>
+                      </div>
+                  </form>
+                  
+            </div>
+        </div>
+    </div>
+</div>
