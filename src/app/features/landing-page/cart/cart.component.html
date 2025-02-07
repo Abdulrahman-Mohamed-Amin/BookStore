@@ -1,8 +1,8 @@
 <app-socials></app-socials>
 <app-shared-nav></app-shared-nav>
-<app-bar [value]="'Cart'"></app-bar>
+<app-bar [value]="'all-books'"></app-bar>
 <div class="container my-5">
-  <div class="row gy-5">
+  <div class="row gy-3">
     <div class="col-lg-7 col-12">
       <div class="books shadow-sm">
         <h6>Products Details</h6>
@@ -42,7 +42,7 @@
                   </div>
                 </td>
                 <td class="total">110AED</td>
-                <td class="total">AED</td>
+                <td class="total">{{110 * product.quantity}}AED</td>
                 <td><i class="fas fa-x delete" (click)="delete(product._id)"></i></td>
               </tr>
 
@@ -70,7 +70,6 @@
         </ul>
       </div>
 
-      <button class="btn proced">Proced <i class="fas fa-cart-plus"></i></button>
     </div>
 
     <div class="col-lg-8 col-12 form">

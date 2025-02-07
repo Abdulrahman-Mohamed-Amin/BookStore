@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SocialsComponent } from '../../../shared/socials/socials.component';
 import { SharedNavComponent } from '../../../shared/shared-nav/shared-nav.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
@@ -25,10 +25,12 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './all-books.component.css'
 })
 export class AllBooksComponent implements OnInit{
+  count:number = 0
   books:any[] =[]
   books2:any[] = []
   message:boolean = false
   noBook:boolean = false
+  numOfBooks:number = 0
   sortByName:string = 'Sort by'
   price:FormGroup = new FormGroup({
     first: new FormControl(null),
@@ -85,7 +87,13 @@ export class AllBooksComponent implements OnInit{
   addToCart(id:string){
     this._landingserv.addBook({'book':id , 'quantity': 1}).subscribe({
       next:(res) =>{
-        this.toaster.success('' , 'Book Has been Added to Cart')
+      
+          this._landingserv.addToCart(res.data.items.length);
+        
+        this.toaster.success('' , 'Book Has been Added to Cart', {
+          positionClass: 'toast-bottom-right', 
+          timeOut: 1000
+        })
       },
       error: (err) =>{
         this.toaster.error('' , err.message)        

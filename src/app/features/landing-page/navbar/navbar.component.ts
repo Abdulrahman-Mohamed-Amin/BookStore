@@ -15,10 +15,13 @@ export class NavbarComponent {
   show:boolean = false
   constructor(private route:Router , private _authService:AuthService , private toaster:ToastrService , private _landService:LandingService){}
   num:number = 0
-    
+  cartCount = 0
 
     ngOnInit(): void {
       this.getNmOfBooks()
+      this._landService.cartCount$.subscribe(count => {
+        this.cartCount = count;
+      });
     }
     getNmOfBooks(){
       this._landService.getMyBasket().subscribe(res =>{

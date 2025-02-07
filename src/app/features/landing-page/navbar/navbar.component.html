@@ -12,8 +12,8 @@
         <div class="d-lg-flex gap-3 fs-5 d-none">
             <i class="far fa-user pe-3"></i>
             <i class="fas fa-bag-shopping pe-3"  routerLink="/cart">
-                @if (num > 0) {
-                    <span>{{num}}</span>
+                @if (cartCount > 0) {
+                    <span>{{cartCount}}</span>
                 }
             </i>
             <i class="fa-solid fa-right-from-bracket" (click)="logOut()"></i>
@@ -30,8 +30,8 @@
     <div class="d-flex mt-5 mb-4 justify-content-center gap-3 fs-4 menu_icons">
         <i class="far fa-user pe-3" (click)="goLogin()"></i>
         <i class="fas fa-bag-shopping pe-3" routerLink="/cart">
-            @if (num > 0) {
-                <span>{{num}}</span>
+            @if (cartCount > 0) {
+                <span>{{cartCount}}</span>
             }
         </i>
         <i class="far fa-heart "></i>

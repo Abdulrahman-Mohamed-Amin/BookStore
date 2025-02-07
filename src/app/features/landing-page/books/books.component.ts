@@ -62,8 +62,12 @@ export class BooksComponent implements OnInit{
   addToCart(id:string){
     this._service.addBook({'book':id , 'quantity': 1}).subscribe({
       next:(res) =>{
-        console.log(res);
-        this.toaster.success('' , 'Book Has been Added to Cart')
+        this._service.addToCart(res.data.items.length);
+        
+        this.toaster.success("" , 'Book Deleted successfully' ,  {
+          positionClass: 'toast-bottom-right', // تغيير المكان لكل 
+          timeOut: 1000
+        })
       },
       error: (err) =>{
         this.toaster.error('' , err.message)        

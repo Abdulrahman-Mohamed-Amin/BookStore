@@ -1,0 +1,15 @@
+.proced{
+    background: var(--orange);
+    color: #fff;
+    margin-top: 30px;
+    /* width: 100%; */
+    border-radius: 0;
+    padding: 7px 12px;
+    border-radius: 4px;
+    transition: 0.2s;
+    border: 2px solid var(--orange);
+}
+.proced:hover{
+    background: transparent;
+    color: var(--orange);
+}

@@ -23,15 +23,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CartComponent implements OnInit {
   productsInBasket: any[] = [];
-  filterdBook: any[] = [];
-  allProduct: any[] = [];
-  filteredProduct: any[] = [];
   basket:number = 0;
   idOfBasket: string = '';
   constructor(private _landingService: LandingService , private toast:ToastrService) {}
 
   ngOnInit(): void {
     this.getProductInBasket()
+    
   }
 
 
@@ -42,49 +40,39 @@ export class CartComponent implements OnInit {
         this.productsInBasket = res.items;
         this.idOfBasket = res._id;
 
-        this._landingService.getBooks().subscribe({
-          next:(all) =>{
-            
-            for(let i = 0 ; i < all.data.length ; i++) {
-              for(let j = 0 ; j < this.productsInBasket.length ; j++){
-                if(this.productsInBasket[j].book == all.data[i]._id){
-
-                  this.filterdBook.push(all.data[j])
-                }
-              }
-            }
-            console.log(this.filterdBook);
-            
-          }
+         }
         })
-      },
-    });
-  }
-  delete(id: string) {
-    console.log(id);
-    
+      }
+  
+  delete(id: string ) {
     this._landingService.deleteBook(id).subscribe({
       next: (res) => {
+        this._landingService.addToCart(res.data.items.length);
+        
+        this.toast.success("" , 'Book Deleted successfully' ,  {
+          positionClass: 'toast-bottom-right', // تغيير المكان لكل 
+          timeOut: 1000
+        })
         this.getProductInBasket()
-        console.log(res);
       },
     });
   }
 
   update(book:any) {
     
-    let cartId = '67a0a71ddf3257cc8e03e65c'
+    let cartId = this.idOfBasket
+    
     const UpdatedBook = { items:[
          {book: book._id,quantity: book.quantity},
       ]}
     
-    console.log(UpdatedBook , cartId);
     this._landingService.update(UpdatedBook , cartId).subscribe({
       next: (res) =>{
         this.toast.success('' , res.message)
       }
     })
   }
+
   increment(i: number) {
     this.productsInBasket[i].quantity++;
   }

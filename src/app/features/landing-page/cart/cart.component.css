@@ -76,14 +76,7 @@ tr{
     padding: 10px 0;
     border-top: 1px solid #ddd;
 }
-.proced{
-    background: var(--orange);
-    color: #fff;
-    margin-top: 30px;
-    width: 100%;
-    border-radius: 0;
-    padding: 10px;
-}
+
 .form{
     background: var(--grad);
     padding: 20px;

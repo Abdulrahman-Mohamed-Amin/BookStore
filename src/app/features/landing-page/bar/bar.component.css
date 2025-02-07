@@ -2,4 +2,23 @@
     background: linear-gradient(to right , #FFE5E5 , #F5FFFE);
     color: #393280;
     text-transform: uppercase;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.main span{
+    cursor: pointer;
+
+}
+.main span:last-child{
+    cursor: pointer;
+    border: 1px solid #393280;
+    border-radius: 4px;
+    padding: 5px 10px;
+    transition: 0.3s;
+}
+.main span:last-child:hover{
+    background: #393280;
+    color: #fff;
 }
